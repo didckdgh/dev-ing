@@ -36,6 +36,10 @@
         <div class="modal-content">
             <span class="close-btn" onclick="closeEditModal()">×</span>
             <h2>장바구니 수정</h2>
+            
+            <!-- 여기에 이미지 추가 -->
+            <img id="edit-modal-image" src="" alt="상품 이미지" style="width: 200px; height: auto; margin-bottom: 10px;">
+            
             <label for="edit-quantity">수량:</label>
             <input type="number" id="edit-quantity" value="1" min="1" onchange="updatePrice()">
             <label for="edit-option">옵션 선택:</label>
@@ -44,6 +48,7 @@
             <button onclick="updateCartItem()">장바구니에 업데이트</button>
         </div>
     </div>
+
 
     <script src="cart-script.js"></script>
 </body>

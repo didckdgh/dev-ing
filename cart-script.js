@@ -1,5 +1,15 @@
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
+let products = [
+    { name: "상품1", basePrice: 10000, category: "category1", options: [{ name: "1kg", weight: 1, price: 10000 }, { name: "3kg", weight: 3, price: 25000 }], imageUrl: "https://picsum.photos/300/200?random=1" },
+    { name: "상품2", basePrice: 15000, category: "category1", options: [{ name: "1kg", weight: 1, price: 15000 }, { name: "5kg", weight: 5, price: 40000 }], imageUrl: "https://picsum.photos/300/200?random=2" },
+    { name: "상품3", basePrice: 20000, category: "category2", options: [{ name: "2kg", weight: 2, price: 20000 }, { name: "4kg", weight: 4, price: 35000 }], imageUrl: "https://picsum.photos/300/200?random=3" },
+    { name: "상품4", basePrice: 25000, category: "category2", options: [{ name: "3kg", weight: 3, price: 25000 }, { name: "6kg", weight: 6, price: 45000 }], imageUrl: "https://picsum.photos/300/200?random=4" },
+    { name: "상품5", basePrice: 30000, category: "category3", options: [{ name: "1kg", weight: 1, price: 30000 }, { name: "2kg", weight: 2, price: 50000 }], imageUrl: "https://picsum.photos/300/200?random=5" },
+    { name: "상품6", basePrice: 35000, category: "category3", options: [{ name: "2kg", weight: 2, price: 35000 }, { name: "4kg", weight: 4, price: 55000 }], imageUrl: "https://picsum.photos/300/200?random=6" },
+];
+
+
 function displayCartItems() {
     const cartItemsList = document.getElementById('cart-items');
     cartItemsList.innerHTML = '';
@@ -111,19 +121,32 @@ function updateCartItem() {
     alert('장바구니가 업데이트되었습니다!');
 }
 
-// 수량과 옵션 변경 시 실시간으로 가격 반영
 function updatePrice() {
     const itemIndex = document.getElementById('edit-modal').getAttribute('data-item-index');
-    const item = cart[itemIndex]; // 기존 cart 배열 사용
+    const item = cart[itemIndex];
     const quantity = parseInt(document.getElementById('edit-quantity').value);
     const optionName = document.getElementById('edit-option').value;
-
-    const product = products.find(p => p.name === item.name); // 기존 products 배열 사용
+    const product = products.find(p => p.name === item.name);
     const selectedOption = product.options.find(option => option.name === optionName);
 
-    const totalPrice = (product.basePrice + selectedOption.price) * quantity;
-    document.getElementById('edit-price').innerText = `${totalPrice}원`;
+    const newTotalPrice = (product.basePrice + selectedOption.price) * quantity;
+    document.getElementById('edit-price').innerText = newTotalPrice.toLocaleString(); // 가격 업데이트
 }
+
+// 수량과 옵션 변경 시 실시간으로 가격 반영
+/*function updatePrice() {
+    const itemIndex = document.getElementById('edit-modal').getAttribute('data-item-index');
+    const item = cart[itemIndex];
+    const product = products.find(p => p.name === item.name);
+
+    const quantity = parseInt(document.getElementById('edit-quantity').value);
+    const selectedOptionName = document.getElementById('edit-option').value;
+    const selectedOption = product.options.find(option => option.name === selectedOptionName);
+
+    const totalPrice = (product.basePrice + selectedOption.price) * quantity;
+    document.getElementById('edit-price').innerText = totalPrice;
+}*/
+
 
 // 수정용 모달 닫기
 function closeEditModal() {
