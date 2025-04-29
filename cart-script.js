@@ -130,7 +130,7 @@ function updatePrice() {
     const selectedOption = product.options.find(option => option.name === optionName);
 
     const newTotalPrice = (product.basePrice + selectedOption.price) * quantity;
-    document.getElementById('edit-price').innerText = newTotalPrice.toLocaleString(); // 가격 업데이트
+    document.getElementById('edit-price').innerText = newTotalPrice; // 가격 업데이트
 }
 
 // 수량과 옵션 변경 시 실시간으로 가격 반영
